@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BuddyBirds</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="content">
+    <h2>BuddyBird</h2>
+    <p>ระบบนี้ช่วยให้คุณสามารถอัปโหลดไฟล์เสียงเพื่อตรวจจับชนิดนก พร้อมแสดงตำแหน่งบนแผนที่</p>
+  </div>
+
+  <section class="upload-section">
+    <h2>Let's get started!</h2>
+    <p>ประเภทไฟล์ที่รองรับ: .wav, .mp3, .aac</p>
+    <div class="upload-box" id="upload-box">
+      <div class="upload-icon">⬆</div>
+      <p>click to upload file</p>
+      <p class="note">ขนาดไฟล์สูงสุด: 20MB</p>
+    </div>
+    <button id="submit-upload" class="submit-btn">Submit</button>
+  </section>
+
+  <section class="flex-container">
+    <div class="map-card">
+      <h3>Map</h3>
+      <div id="map"></div>
+    </div>
+
+    <div class="table-card">
+      <h3>ข้อมูลล่าสุด</h3>
+      <div class="table-wrapper">
+        <table id="birdTable">
+          <thead>
+            <tr>
+              <th>ไฟล์เสียง</th>
+              <th class="sortable">ชื่อชนิดนก</th>
+              <th>ประเทศ</th>
+              <th>Lat, Lon</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <a href="dashboard.html" class="more-link">ดูทั้งหมด</a>
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/script/script.js"></script>
+</body>
+</html>

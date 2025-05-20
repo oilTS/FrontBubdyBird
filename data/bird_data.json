@@ -1,0 +1,63 @@
+[
+  {
+    "file": "Sparrow_sound.mp3",
+    "species": "Eurasian Tree Sparrow",
+    "length": "15s",
+    "date": "2025-05-20",
+    "time": "14:35",
+    "country": "Thailand",
+    "location": "14.02, 100.727",
+    "spectrogram": "spectrograms/bird1.png",
+    "image": "Eurasian_Tree_Sparrow.jpg",
+    "confidence": "93.5%"
+  },
+  {
+    "file": "myna-birds-singing-109058.mp3",
+    "species": "Common Myna",
+    "length": "62s",
+    "date": "2025-05-18",
+    "time": "10:15",
+    "country": "Thailand",
+    "location": "13.73, 100.51",
+    "spectrogram": "spectrograms/bird2.png",
+    "image": "Common_Myna.jpg",
+    "confidence": "87.2%"
+  },
+  {
+    "file": "Zebra_Dove_sound.mp3",
+    "species": "Zebra Dove",
+    "length": "8s",
+    "date": "2025-05-17",
+    "time": "09:00",
+    "country": "Thailand",
+    "location": "13.90, 100.55",
+    "spectrogram": "spectrograms/bird3.png",
+    "image": "/image/Zebra_Dove.jpg",
+    "confidence": "90.4%"
+  },
+  {
+    "file": "Pigeon.mp3",
+    "species": "Rock Pigeon",
+    "length": "3s",
+    "date": "2025-05-17",
+    "time": "09:00",
+    "country": "Thailand",
+    "location": "13.91, 100.54",
+    "spectrogram": "spectrograms/bird3.png",
+    "image": "Rock_Pigeon.jpg",
+    "confidence": "73.4%"
+  },
+  {
+    "file": "Red-watted_Lapwing_sound.mp3",
+    "species": "Red-watted Lapwing",
+    "length": "78s",
+    "date": "2025-05-17",
+    "time": "09:00",
+    "country": "Thailand",
+    "location": "13.87, 100.53",
+    "spectrogram": "spectrograms/bird3.png",
+    "image": "Red-watted_Lapwing.jpg",
+    "confidence": "73.4%"
+  }
+]
+

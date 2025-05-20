@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #f5f3ef;
+  color: #2e2e2e;
+  padding: 20px;
+}
+
+header {
+  background: linear-gradient(to right, #2e4a29, #4d6f3c);
+  color: white;
+  padding: 30px 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end; /* ชิดขวา */
+  padding: 15px 30px;
+  background-color: None;
+}
+
+.nav nav a {
+  display: inline-block;
+  font-size: 20px;
+  margin-left: 20px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  position: relative;
+  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.nav nav a:hover {
+  transform: scale(1.1);
+  color: #ffffff;
+}
+
+.nav nav a.active {
+  color: #ffffff;
+}
+
+.nav nav a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+}
+
+.table-section {
+  padding: 30px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+a.link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a.link:hover {
+  text-decoration: underline;
+}

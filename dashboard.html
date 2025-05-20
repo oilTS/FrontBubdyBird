@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BuddyBirds Dashboard</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <nav>
+        <a href="index.html" >Home</a>
+        <a href="dashboard.html" class="active">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="map-wrapper">
+    <div id="map"></div>
+  </section>
+
+  <section class="table-section">
+    <h2>รายการข้อมูลเสียงนก</h2>
+    <div class="table-wrapper">
+      <table id="birdTable">
+        <thead>
+          <tr>
+            <th>ไฟล์เสียง</th>
+            <th>รูป</th>
+            <th>ชื่อชนิดนก</th>
+            <th>ความยาว</th>
+            <th>วันที่</th>
+            <th>เวลา</th>
+            <th>ประเทศ</th>
+            <th>Lat, Lon</th>
+            <th>Spectrogram</th>
+            <th>ความแม่นยำ</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/script/dashboard.js"></script>
+</body>
+</html>
