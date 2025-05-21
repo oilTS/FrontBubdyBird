@@ -1,18 +1,11 @@
 let map;
 let markerLayer;
+let currentData = [];
 
 document.addEventListener("DOMContentLoaded", () => {
   const tableBody = document.querySelector("#birdTable tbody");
-  const headerSpecies = document.querySelector("#birdTable th:nth-child(3)"); // ชื่อชนิดนกอยู่ช่องที่ 4
+  const headerSpecies = document.querySelector("#birdTable th:nth-child(3)");
   let ascending = true;
-  let currentData = [];
-
-  headerSpecies.innerHTML = "ชื่อชนิดนก ▲";
-  headerSpecies.style.cursor = "pointer";
-  headerSpecies.addEventListener("click", () => {
-    ascending = !ascending;
-    sortAndRender();
-  });
 
   function renderTable(dataArray) {
     tableBody.innerHTML = "";
@@ -24,14 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td><button class="play-btn" data-src="audio/${item.file}">▶</button></td>
-        <td><a href="#" class="bird-image-link" data-image="image/${item.image}">${item.image}</a></td>
+        <td><button class="image-btn" data-img="image/${item.image}">🖼️</button></td>
         <td>${item.species}</td>
         <td>${item.length}</td>
         <td>${item.date}</td>
         <td>${item.time}</td>
         <td>${item.country}</td>
-        <td><button class="goto-map" data-lat="${lat}" data-lng="${lng}">${item.location}</button></td>
-        <td><a class="link" href="${item.spectrogram}" target="_blank">ดู Spectrogram</a></td>
+        <td><span class="clickable-location" data-index="${index}" data-lat="${lat}" data-lng="${lng}">${item.location}</span></td>
+        <td><button class="spectrogram-btn" data-img="${item.spectrogram}">📈</button></td>
         <td>${item.confidence}</td>
       `;
       tableBody.appendChild(row);
@@ -43,15 +36,17 @@ document.addEventListener("DOMContentLoaded", () => {
       L.marker([lat, lng]).bindPopup(popupContent).addTo(markerLayer);
     });
 
+    addEventListeners();
+  }
+
+  function addEventListeners() {
     document.querySelectorAll(".play-btn").forEach(btn => {
       const audio = new Audio(btn.getAttribute("data-src"));
-
       btn.addEventListener("click", () => {
         if (window.currentAudio && window.currentAudio !== audio) {
           window.currentAudio.pause();
           if (window.currentPlayBtn) window.currentPlayBtn.textContent = "▶";
         }
-
         if (audio.paused) {
           audio.play();
           btn.textContent = "⏸";
@@ -63,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
           window.currentAudio = null;
           window.currentPlayBtn = null;
         }
-
         audio.addEventListener("ended", () => {
           btn.textContent = "▶";
           window.currentAudio = null;
@@ -72,28 +66,51 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    document.querySelectorAll(".goto-map").forEach(btn => {
+    document.querySelectorAll(".image-btn").forEach(btn => {
       btn.addEventListener("click", () => {
-        const lat = parseFloat(btn.getAttribute("data-lat"));
-        const lng = parseFloat(btn.getAttribute("data-lng"));
-        map.setView([lat, lng], 13);
-        L.popup().setLatLng([lat, lng]).setContent("เลื่อนมายังตำแหน่งนี้").openOn(map);
+        const imgSrc = btn.getAttribute("data-img");
+        document.getElementById("image-popup-img").src = imgSrc;
+        document.getElementById("image-popup").style.display = "flex";
       });
     });
 
-    document.querySelectorAll(".bird-image-link").forEach(link => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const imageUrl = link.getAttribute("data-image");
-        const popup = window.open("", "birdImage", "width=600,height=400");
-        popup.document.write(`
-          <html>
-            <head><title>Bird Image</title></head>
-            <body style="margin:0;padding:0;text-align:center;background:#000;">
-              <img src="${imageUrl}" style="max-width:100%; max-height:100%;">
-            </body>
-          </html>
-        `);
+    document.querySelectorAll(".spectrogram-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const imgSrc = btn.getAttribute("data-img");
+        document.getElementById("spectrogram-popup-img").src = imgSrc;
+        document.getElementById("spectrogram-popup").style.display = "flex";
+      });
+    });
+
+    document.querySelectorAll(".clickable-location").forEach(span => {
+      span.addEventListener("click", () => {
+        const lat = parseFloat(span.getAttribute("data-lat"));
+        const lng = parseFloat(span.getAttribute("data-lng"));
+        const index = parseInt(span.getAttribute("data-index"));
+        const bird = currentData[index];
+
+        document.getElementById("map-popup").style.display = "flex";
+
+        setTimeout(() => {
+          if (L.DomUtil.get('popup-map') !== null) {
+            L.DomUtil.get('popup-map')._leaflet_id = null;
+          }
+
+          const popupMap = L.map("popup-map").setView([lat, lng], 13);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+          }).addTo(popupMap);
+
+          const popupContent = `
+            <strong>${bird.species}</strong><br>
+            <img src="image/${bird.image}" width="100">
+          `;
+
+          L.marker([lat, lng])
+            .addTo(popupMap)
+            .bindPopup(popupContent)
+            .openPopup();
+        }, 100);
       });
     });
   }
@@ -107,6 +124,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     renderTable(currentData);
   }
+
+  headerSpecies.style.cursor = "pointer";
+  headerSpecies.addEventListener("click", () => {
+    ascending = !ascending;
+    sortAndRender();
+  });
 
   fetch("data/bird_data.json")
     .then(res => res.json())
@@ -124,4 +147,15 @@ function initMap() {
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
+}
+
+function closeMapPopup() {
+  document.getElementById("map-popup").style.display = "none";
+  document.getElementById("popup-map").innerHTML = "";
+}
+function closeImagePopup() {
+  document.getElementById("image-popup").style.display = "none";
+}
+function closeSpectrogramPopup() {
+  document.getElementById("spectrogram-popup").style.display = "none";
 }

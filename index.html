@@ -4,15 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BuddyBirds</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mitr&family=Noto+Sans+Thai&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
   <header>
-    <div class="nav">
+   <div class="nav">
       <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="dashboard.html">Dashboard</a>
+        <div class="logo">
+          <img src="/image/bird_svgrepo.com.svg" alt="BuddyBirds Logo">
+          <span>BuddyBirds</span>
+        </div>
+        <div class="nav-links">
+          <a href="index.html" class="active">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="ask.html">Ask</a>
+        </div>
       </nav>
     </div>
   </header>
@@ -24,14 +32,30 @@
 
   <section class="upload-section">
     <h2>Let's get started!</h2>
-    <p>ประเภทไฟล์ที่รองรับ: .wav, .mp3, .aac</p>
     <div class="upload-box" id="upload-box">
       <div class="upload-icon">⬆</div>
       <p>click to upload file</p>
+      <p class="note">ประเภทไฟล์ที่รองรับ: .wav, .mp3, .aac</p>
       <p class="note">ขนาดไฟล์สูงสุด: 20MB</p>
     </div>
     <button id="submit-upload" class="submit-btn">Submit</button>
   </section>
+
+  <!-- Popup แสดงผล -->
+  <div class="popup-overlay" id="result-popup">
+    <div class="popup-content">
+      <h3>Result</h3>
+      <img id="result-img" src="image/sparrow.jpg" alt="Bird" />
+      <p><strong>Thai Name:</strong> <span id="thai-name">นกกระจอกบ้าน</span></p>
+      <p><strong>Common Name:</strong> <span id="common-name">Eurasian Tree Sparrow</span></p>
+      <p><strong>Accurate:</strong> <span id="accuracy">75.43%</span></p>
+      <div class="feedback-btns">
+        <button class="btn correct">ถูกต้อง</button>
+        <button class="btn unsure">ไม่ทราบ</button>
+        <button class="btn wrong">ไม่ถูกต้อง</button>
+      </div>
+    </div>
+  </div>
 
   <section class="flex-container">
     <div class="map-card">

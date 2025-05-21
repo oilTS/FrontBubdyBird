@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bird Ask Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mitr&family=Noto+Sans+Thai&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/ask.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <nav>
+        <div class="logo">
+          <img src="/image/bird_svgrepo.com.svg" alt="BuddyBirds Logo">
+          <span>BuddyBirds</span>
+        </div>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="ask.html" class="active">Ask</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="ask-container">
+    <h2>ช่วยเรายืนยันข้อมูลนก</h2>
+    <div id="bird-card" class="card">
+      <img id="bird-image" src="" alt="Bird Image" />
+      <p><strong>ชื่อ:</strong> <span id="bird-species"></span></p>
+      <p><strong>ไฟล์เสียง:</strong> <button class="play-btn" id="bird-audio-btn">▶</button></p>
+      <p><strong>Spectrogram:</strong> <button id="open-spectrogram">📈</button></p>
+      <p><strong>วันที่:</strong> <span id="bird-date">-</span></p>
+      <p><strong>เวลา:</strong> <span id="bird-time">-</span></p>
+      <p><strong>ประเทศ:</strong> <span id="bird-country">-</span></p>
+      <p><strong>ตำแหน่ง:</strong> 
+        <span id="bird-location" class="clickable-location">(14.02, 100.727)</span>
+      </p>
+      <div class="feedback-buttons">
+        <button class="btn correct" onclick="submitFeedback('correct')">ถูกต้อง</button>
+        <button class="btn unsure" onclick="submitFeedback('unsure')">ไม่แน่ใจ</button>
+        <button class="btn wrong" onclick="submitFeedback('wrong')">ไม่ถูกต้อง</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Popup Map -->
+  <div id="map-popup" class="popup-map-overlay">
+    <div class="popup-map-content">
+      <button class="close-btn" onclick="closeMapPopup()">ปิด</button>
+      <div id="popup-map" style="width:100%; height:300px;"></div>
+    </div>
+  </div>
+
+  <!-- Popup Spectrogram -->
+  <div id="img-popup" class="popup-map-overlay">
+    <div class="popup-map-content">
+      <button class="close-btn" onclick="closeImgPopup()">ปิด</button>
+      <img id="spectrogram-img" src="" style="width:100%; max-height:300px; object-fit:contain;">
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/script/ask.js"></script>
+</body>
+</html>
