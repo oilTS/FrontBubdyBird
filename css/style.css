@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Mitr', sans-serif;
 }
 
 body {
@@ -19,14 +19,35 @@ header {
   margin-bottom: 30px;
 }
 
-.nav {
+.nav nav {
   display: flex;
-  justify-content: flex-end; /* ชิดขวา */
-  padding: 15px 30px;
-  background-color: None;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.nav nav a {
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 10px;
+  filter: brightness(0) invert(1);
+}
+
+.logo span {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a {
   display: inline-block;
   font-size: 20px;
   margin-left: 20px;
@@ -37,16 +58,12 @@ header {
   transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-.nav nav a:hover {
-  transform: scale(1.1);
+.nav-links a:hover,
+.nav-links a.active {
   color: #ffffff;
 }
 
-.nav nav a.active {
-  color: #ffffff;
-}
-
-.nav nav a.active::after {
+.nav-links a.active::after {
   content: "";
   position: absolute;
   bottom: -5px;
@@ -74,7 +91,7 @@ header {
 }
 
 .upload-section {
-  background-color: None;
+  background-color: transparent;
   padding: 30px;
   text-align: center;
   margin-bottom: 40px;
@@ -106,23 +123,26 @@ header {
   background-color: #e8f5e9;
 }
 
-.data-section {
+.data-section,
+.flex-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
+  gap: 20px;
+  justify-content: space-between;
 }
 
-.map-card {
-  background-color: #374c3c;
-  color: white;
+.map-card,
+.table-card {
+  flex: 1 1 48%;
+  background-color: #fefefe;
+  padding: 15px;
   border-radius: 10px;
-  padding: 20px;
-  width: 100%;
-  max-width: 600px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin: 20px 0;
 }
 
-.map-card h3 {
+.map-card h3,
+.table-card h3 {
   font-size: 16px;
   margin-bottom: 10px;
   color: #2e2e2e;
@@ -130,52 +150,9 @@ header {
 
 #map {
   width: 100%;
-  height: 300px;
-  border-radius: 8px;
-}
-#map {
-  width: 100%;
-  height: 300px;
+  height: 350px;
   border-radius: 10px;
   margin-top: 10px;
-}
-.data-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-}
-
-.map-card, .table-card {
-  flex: 1 1 48%;
-  background-color: #fefefe;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.more-link {
-  display: block;
-  width: fit-content;
-  margin-left: auto;
-  margin-top: 10px;
-  color: #007bff;
-  text-decoration: underline;
-}
-
-#map {
-  width: 100%;
-  height: 300px;
-  border-radius: 10px;
-  margin-top: 10px;
-}
-
-.map-card, .table-card {
-  background-color: #fefefe;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin: 20px 0;
 }
 
 .table-wrapper {
@@ -184,57 +161,6 @@ header {
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.table-card h3 {
-  font-size: 16px;
-  margin-bottom: 10px;
-  color: #2e2e2e;
-}
-
-th, td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-th {
-  background-color: #f0f0f0;
-}
-
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.map-card, .table-card {
-  flex: 1 1 48%;
-  background-color: #fefefe;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-#map {
-  width: 100%;
-  height: 300px;
-  border-radius: 10px;
-}
-
-.table-wrapper {
-  overflow-x: auto;
-  border-radius: 8px;
 }
 
 table {
@@ -290,7 +216,7 @@ tr:nth-child(even) {
   border-radius: 12px;
   width: 300px;
   text-align: center;
-  }
+}
 
 .popup-content img {
   width: 100%;
@@ -318,6 +244,15 @@ tr:nth-child(even) {
 .correct { background: #4caf50; }
 .unsure { background: #757575; }
 .wrong { background: #e53935; }
+
+.more-link {
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: underline;
+}
 
 .clickable-location {
   color: #2196f3;

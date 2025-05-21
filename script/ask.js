@@ -13,7 +13,6 @@ function loadBird(index) {
   document.getElementById("bird-time").textContent = bird.time;
   document.getElementById("spectrogram-img").src = bird.spectrogram;
 
-  // พิกัด
   if (bird.location && bird.location.includes(",")) {
     document.getElementById("bird-location").textContent = bird.location;
     lastLatLon = bird.location.split(",").map(Number);
@@ -22,7 +21,6 @@ function loadBird(index) {
     lastLatLon = null;
   }
 
-  // เล่นเสียง
   const playBtn = document.getElementById("bird-audio-btn");
   playBtn.textContent = "▶";
   playBtn.onclick = () => {
@@ -69,19 +67,36 @@ function submitFeedback(choice) {
   }
 }
 
-// คลิกที่ lat,lon แล้วเปิดแผนที่
+// ✅ เปิด popup map พร้อม reset map instance
 document.getElementById("bird-location").addEventListener("click", () => {
   if (!lastLatLon) {
     alert("ไม่มีพิกัด");
     return;
   }
+
   document.getElementById("map-popup").style.display = "flex";
+
   setTimeout(() => {
+    // Reset Leaflet instance เพื่อป้องกัน error
+    if (L.DomUtil.get('popup-map') != null) {
+      L.DomUtil.get('popup-map')._leaflet_id = null;
+    }
+
     const map = L.map("popup-map").setView(lastLatLon, 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
-    L.marker(lastLatLon).addTo(map).bindPopup("ตำแหน่งนก").openPopup();
+
+    const bird = birdData[currentIndex];
+    const popupHtml = `
+      <strong>${bird.species}</strong><br/>
+      <img src="image/${bird.image}" width="100" style="margin-top:5px">
+    `;
+
+    L.marker(lastLatLon)
+      .addTo(map)
+      .bindPopup(popupHtml)
+      .openPopup();
   }, 100);
 });
 
@@ -90,7 +105,7 @@ function closeMapPopup() {
   document.getElementById("popup-map").innerHTML = "";
 }
 
-// popup spectrogram
+// popup ภาพ spectrogram
 document.getElementById("open-spectrogram").addEventListener("click", () => {
   document.getElementById("img-popup").style.display = "flex";
 });
@@ -98,10 +113,11 @@ function closeImgPopup() {
   document.getElementById("img-popup").style.display = "none";
 }
 
+// โหลดข้อมูลนก
 fetch("data/bird_data.json")
   .then(res => res.json())
   .then(data => {
     birdData = data;
     loadBird(currentIndex);
   })
-  .catch(err => console.error("โหลดข้อมูลไม่สำเร็จ", err))
+  .catch(err => console.error("โหลดข้อมูลไม่สำเร็จ", err));
