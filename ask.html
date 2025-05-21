@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ask - Bird Validation</title>
+  <link rel="stylesheet" href="ask.css" />
+</head>
+<body>
+  <div class="ask-container">
+    <h2>ช่วยเรายืนยันข้อมูลนก</h2>
+    <div id="bird-card" class="card">
+      <img id="bird-image" src="" alt="Bird Image" />
+      <audio id="bird-audio" controls></audio>
+      <p><strong>ชื่อสายพันธุ์:</strong> <span id="bird-species"></span></p>
+      <div class="feedback-buttons">
+        <button class="btn correct" onclick="submitFeedback('correct')">ถูกต้อง</button>
+        <button class="btn unsure" onclick="submitFeedback('unsure')">ไม่แน่ใจ</button>
+        <button class="btn wrong" onclick="submitFeedback('wrong')">ไม่ถูกต้อง</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="ask.js"></script>
+</body>
+</html>
