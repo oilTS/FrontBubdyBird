@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then(data => {
         alert("อัปโหลดสำเร็จ!");
-        // สามารถ reload หรือทำอย่างอื่นต่อได้ที่นี่
       })
       .catch(err => {
         alert("เกิดข้อผิดพลาดในการอัปโหลด");
@@ -58,12 +57,14 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
+  // MAP
   map = L.map('map').setView([14.02, 100.727], 6);
   markerLayer = L.layerGroup().addTo(map);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
+  // TABLE
   fetch("data/bird_data.json")
     .then(res => res.json())
     .then(data => {
@@ -93,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tableBody.innerHTML = "";
         markerLayer.clearLayers();
 
-        entries.forEach(item => {
+        entries.forEach((item, index) => {
           const [lat, lng] = item.location.split(",").map(Number);
 
           const marker = L.marker([lat, lng]).bindPopup(`
@@ -106,14 +107,18 @@ document.addEventListener("DOMContentLoaded", function () {
             <td><button class="play-btn" data-src="audio/${item.file}">▶</button></td>
             <td>${item.species}</td>
             <td>${item.country || 'Thailand'}</td>
-            <td><button class="goto-map" data-lat="${lat}" data-lng="${lng}">${item.location}</button></td>
+            <td><span class="clickable-location" data-lat="${lat}" data-lng="${lng}" style="color:#2196f3; text-decoration:underline; cursor:pointer;">
+              ${item.location}
+            </span></td>
           `;
 
-          row.querySelector(".goto-map").addEventListener("click", () => {
+          // คลิกพิกัด → ไปที่ map
+          row.querySelector(".clickable-location").addEventListener("click", () => {
             map.setView([lat, lng], 13);
             marker.openPopup();
           });
 
+          // ปุ่มเล่นเสียง
           const audio = new Audio("audio/" + item.file);
           const playBtn = row.querySelector(".play-btn");
           playBtn.addEventListener("click", () => {
@@ -148,4 +153,19 @@ document.addEventListener("DOMContentLoaded", function () {
       sortAndRender();
     })
     .catch(err => console.error("โหลดข้อมูลไม่สำเร็จ:", err));
+});
+
+// ปุ่มแสดงผลลัพธ์แบบ mock
+document.getElementById("submit-btn")?.addEventListener("click", () => {
+  document.getElementById("result-img").src = "image/sparrow.jpg";
+  document.getElementById("thai-name").textContent = "นกกระจอกบ้าน";
+  document.getElementById("common-name").textContent = "Eurasian Tree Sparrow";
+  document.getElementById("accuracy").textContent = "75.43%";
+  document.getElementById("result-popup").style.display = "flex";
+});
+
+document.getElementById("result-popup")?.addEventListener("click", e => {
+  if (e.target.id === "result-popup") {
+    e.target.style.display = "none";
+  }
 });

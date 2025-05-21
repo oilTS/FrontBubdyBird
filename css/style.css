@@ -272,3 +272,55 @@ tr:nth-child(even) {
 .submit-btn:hover {
   background-color: #3e8e41;
 }
+
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 300px;
+  text-align: center;
+  }
+
+.popup-content img {
+  width: 100%;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.feedback-btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.feedback-btns button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.correct { background: #4caf50; }
+.unsure { background: #757575; }
+.wrong { background: #e53935; }
+
+.clickable-location {
+  color: #2196f3;
+  text-decoration: underline;
+  cursor: pointer;
+}
