@@ -14,7 +14,7 @@ body {
 header {
   background: linear-gradient(to right, #2e4a29, #4d6f3c);
   color: white;
-  padding: 30px 20px;
+  padding: 10px 20px 15px 20px;
   border-radius: 10px;
   margin-bottom: 30px;
 }
@@ -31,18 +31,21 @@ header {
 }
 
 .logo img {
-  height: 40px;
-  margin-right: 10px;
+  width: 70px;
+  height: 25%;
+  margin-right: -35px;
   filter: brightness(0) invert(1);
 }
 
 .logo span {
-  font-size: 22px;
-  font-weight: bold;
+  margin-top: 55px;
+  font-size: 20px;
   color: white;
+  font-weight: bold;
 }
 
 .nav-links {
+  margin-top: 55px;
   display: flex;
   align-items: center;
 }
@@ -53,24 +56,32 @@ header {
   margin-left: 20px;
   text-decoration: none;
   color: #ffffff;
-  font-weight: bold;
   position: relative;
   transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-.nav-links a:hover,
+.nav-links a:hover {
+  transform: translateY(-4px);
+  text-shadow: 0px 2px 5px #fffee1ab;
+  font-weight: bold;
+}
+
 .nav-links a.active {
   color: #ffffff;
+  font-weight: bold;
 }
 
 .nav-links a.active::after {
   content: "";
+  align-content: center;
+  padding: 0px 3px 0px 2px;
   position: absolute;
-  bottom: -5px;
-  left: 0;
+  bottom: 5px;
+  left: -2.5px;
   width: 100%;
-  height: 2px;
-  background-color: #ffffff;
+  height: 10px;
+  background-color: #ffea9447;
+  text-shadow: 0px 2px 5px #ffffffac;
 }
 
 .content {
@@ -80,14 +91,15 @@ header {
 }
 
 .content h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+  font-size: xx-large;
+  margin-bottom: 5px;
   color: #2e4a29;
+  text-shadow: 1px 2px 3px #dda15e;
 }
 
 .content p {
   font-size: 1em;
-  color: #555;
+  color: #106c2c;
 }
 
 .upload-section {
@@ -250,7 +262,7 @@ tr:nth-child(even) {
   width: fit-content;
   margin-left: auto;
   margin-top: 10px;
-  color: #007bff;
+  color: #0fb435;
   text-decoration: underline;
 }
 

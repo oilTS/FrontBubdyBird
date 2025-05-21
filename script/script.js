@@ -58,11 +58,36 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // MAP
-  map = L.map('map').setView([14.02, 100.727], 6);
+  map = L.map('map').setView([13.9, 100.5], 9);
   markerLayer = L.layerGroup().addTo(map);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
+
+  const customIcon = (image) => {
+    const pinurl = '/assets/pin-2.svg';
+    // ถ้าอยากใช้ pin ใน /assets ให้เปลี่ยน L.divIcon เป็น L.icon + ลบส่วน html กับ classname ออก + แก้ไอคอนเซตติ้งตามคอมเม้น
+    return L.divIcon({
+      html: `<div style="
+      width: 40px;
+      height: 40px;
+      background: url('/image/${image}') no-repeat;
+      background-size: cover;
+      background-position: right center;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0px 0px 10px #0d8a21;
+      "></div>`,
+      className: "",
+      iconUrl: pinurl,
+      shadowUrl: '/assets/pin-blur.png',
+      iconSize: [38, 95],
+      iconAnchor: [25, 25],   //22, 94
+      shadowSize:   [25, 12],
+      shadowAnchor: [15, 32],
+      popupAnchor: [-6, -25]  //-3, -60
+    });
+  }
 
   // TABLE
   fetch("data/bird_data.json")
@@ -97,9 +122,11 @@ document.addEventListener("DOMContentLoaded", function () {
         entries.forEach((item, index) => {
           const [lat, lng] = item.location.split(",").map(Number);
 
-          const marker = L.marker([lat, lng]).bindPopup(`
-            <strong>${item.species}</strong><br/>
-            <img src="image/${item.image}" width="100" style="margin-top:5px">
+          const marker = L.marker([lat, lng], {
+            icon: customIcon(item.image) // pass the bird image for dynamic icons
+          }).bindPopup(`
+            <strong style="font-size:15px">${item.species}</strong><br/>
+            <img src="image/${item.image}" width="150" style="margin:15px auto 20px auto; display: block; border-radius: 6%;"> 
           `).addTo(markerLayer);
 
           const row = document.createElement("tr");
@@ -114,7 +141,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
           // คลิกพิกัด → ไปที่ map
           row.querySelector(".clickable-location").addEventListener("click", () => {
-            map.setView([lat, lng], 13);
+            const offsetLat = lat + 0.004; // shift view slightly south to "lower" the popup in the center
+            map.setView([offsetLat, lng], 15);
             marker.openPopup();
           });
 
