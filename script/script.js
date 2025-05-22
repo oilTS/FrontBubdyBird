@@ -75,9 +75,11 @@ document.addEventListener("DOMContentLoaded", function () {
       background-size: cover;
       background-position: right center;
       border-radius: 50%;
-      border: 2px solid #fff;
-      box-shadow: 0px 0px 10px #0d8a21;
-      "></div>`,
+      border: 2.5px solid #05581f;
+      box-shadow: 0px 0px 10px #0d8a21; outline: 2px solid #ffffff">
+      <div style="color:#05581f;
+      margin-top: 30px; margin-left: 10px; 
+      text-shadow: -0px 8px 15px #0d8a21; font-size: 16px;">▼</div></div>`,
       className: "",
       iconUrl: pinurl,
       shadowUrl: '/assets/pin-blur.png',
@@ -131,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           const row = document.createElement("tr");
           row.innerHTML = `
-            <td><button class="play-btn" data-src="audio/${item.file}">▶</button></td>
+            <td><button class="play-btn" data-src="audio/${item.file}"> 🔊 </button></td>
             <td>${item.species}</td>
             <td>${item.country || 'Thailand'}</td>
             <td><span class="clickable-location" data-lat="${lat}" data-lng="${lng}" style="color:#2196f3; text-decoration:underline; cursor:pointer;">
@@ -152,23 +154,23 @@ document.addEventListener("DOMContentLoaded", function () {
           playBtn.addEventListener("click", () => {
             if (window.currentAudio && window.currentAudio !== audio) {
               window.currentAudio.pause();
-              if (window.currentPlayBtn) window.currentPlayBtn.textContent = "▶";
+              if (window.currentPlayBtn) window.currentPlayBtn.textContent = " 🔊 ";
             }
 
             if (audio.paused) {
               audio.play();
-              playBtn.textContent = "⏸";
+              playBtn.textContent = "🎵";
               window.currentAudio = audio;
               window.currentPlayBtn = playBtn;
             } else {
               audio.pause();
-              playBtn.textContent = "▶";
+              playBtn.textContent = "🔈";
               window.currentAudio = null;
               window.currentPlayBtn = null;
             }
 
             audio.addEventListener("ended", () => {
-              playBtn.textContent = "▶";
+              playBtn.textContent = "🔊";
               window.currentAudio = null;
               window.currentPlayBtn = null;
             });
