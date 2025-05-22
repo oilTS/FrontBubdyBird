@@ -75,9 +75,9 @@ document.addEventListener("DOMContentLoaded", function () {
       background-size: cover;
       background-position: right center;
       border-radius: 50%;
-      border: 2.5px solid #05581f;
-      box-shadow: 0px 0px 10px #0d8a21; outline: 2px solid #ffffff">
-      <div style="color:#05581f;
+      border: 2.5px solid #fff;
+      box-shadow: 0px 0px 10px #0d8a21; outline: 3px solid #05581f">
+      <div style="color: #05581f;
       margin-top: 30px; margin-left: 10px; 
       text-shadow: -0px 8px 15px #0d8a21; font-size: 16px;">▼</div></div>`,
       className: "",

@@ -8,69 +8,7 @@
 body {
   background-color: #f5f3ef;
   color: #2e2e2e;
-  padding: 20px;
-}
-
-header {
-  background: linear-gradient(to right, #2e4a29, #4d6f3c);
-  color: white;
-  padding: 30px 20px;
-  border-radius: 10px;
-  margin-bottom: 30px;
-}
-
-.nav nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo img {
-  height: 40px;
-  margin-right: 10px;
-  filter: brightness(0) invert(1);
-}
-
-.logo span {
-  font-size: 22px;
-  font-weight: bold;
-  color: white;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-}
-
-.nav-links a {
-  display: inline-block;
-  font-size: 20px;
-  margin-left: 20px;
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: bold;
-  position: relative;
-  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  color: #ffffff;
-}
-
-.nav-links a.active::after {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #ffffff;
+  padding: 0px;
 }
 
 .ask-container {

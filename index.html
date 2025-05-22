@@ -6,6 +6,7 @@
   <title>BuddyBirds</title>
   <link href="https://fonts.googleapis.com/css2?family=Mitr&family=Noto+Sans+Thai&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
@@ -35,10 +36,9 @@
   <section class="upload-section">
     <h2>Let's get started!</h2>
     <div class="upload-box" id="upload-box">
-      <div class="upload-icon">⬆</div>
-      <p>click to upload file</p>
-      <p class="note">ประเภทไฟล์ที่รองรับ: .wav, .mp3, .aac</p>
-      <p class="note">ขนาดไฟล์สูงสุด: 20MB</p>
+      <div class="upload-icon"><img src="/assets/file-upload.svg" alt="⭡">
+      <p id="up-text" style="font-size: larger; color: #424341;">click to upload file</p></div>
+      <p class="note">ประเภทไฟล์ที่รองรับ: .wav, .mp3, .aac<br>ขนาดไฟล์สูงสุด: 20MB</p>
     </div>
     <button id="submit-upload" class="submit-btn">Submit</button>
   </section>
@@ -61,7 +61,7 @@
 
   <section class="flex-container">
     <div class="map-card">
-      <h3>Map</h3>
+      <h3>สำรวจนกบนแผนที่</h3>
       <div id="map"></div>
     </div>
 
