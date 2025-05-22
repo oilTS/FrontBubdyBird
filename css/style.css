@@ -8,7 +8,7 @@
 body {
   background-color: #f5f3ef;
   color: #2e2e2e;
-  padding: 20px;
+  padding: 0px;
 }
 
 header {
@@ -16,7 +16,7 @@ header {
   color: white;
   padding: 10px 20px 15px 20px;
   border-radius: 10px;
-  margin-bottom: 30px;
+  margin: 20px 20px 30px 20px;
 }
 
 .nav nav {
@@ -85,26 +85,44 @@ header {
 }
 
 .content {
-  padding: 25px 30px;
+  padding: 50px;
   border-radius: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
+  text-align: center;
 }
 
 .content h2 {
-  font-size: xx-large;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   color: #2e4a29;
-  text-shadow: 1px 2px 3px #dda15e;
+  text-shadow: -1px -1px 5px #11bb1198;
 }
 
 .content p {
-  font-size: 1em;
-  color: #106c2c;
+  font-size: 18px;
+  color: #097a0b;
+}
+
+#topic {
+  font-size: 50px;
+  position: relative;
+  display: inline-block;
+}
+
+#topic::after {
+  content: "";
+  padding: 0px 0px 0px 0px;
+  position: absolute;
+  left: -10px;
+  right: -10px;
+  bottom: 5px;
+  height: 30px;
+  background-color: #f8ab059c;
+  z-index: -1;
 }
 
 .upload-section {
-  background-color: transparent;
-  padding: 30px;
+  background-color: #f2e7db;
+  padding: 50px;
   text-align: center;
   margin-bottom: 40px;
 }
@@ -112,7 +130,7 @@ header {
 .upload-box {
   border: 2px dashed #aaa;
   padding: 40px;
-  margin: 20px auto;
+  margin: 25px auto;
   width: 90%;
   max-width: 500px;
   border-radius: 8px;
@@ -133,6 +151,7 @@ header {
 .upload-box.uploaded {
   border-color: #4caf50;
   background-color: #e8f5e9;
+  margin: 25px;
 }
 
 .data-section,
@@ -141,6 +160,8 @@ header {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: space-between;
+  margin: 25px;
+  /*background-color: #6e7c63;*/
 }
 
 .map-card,
@@ -149,8 +170,8 @@ header {
   background-color: #fefefe;
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin: 20px 0;
+  box-shadow: 0 2px 8px #0639016f;
+  margin: 5px ;
 }
 
 .map-card h3,
@@ -158,6 +179,7 @@ header {
   font-size: 16px;
   margin-bottom: 10px;
   color: #2e2e2e;
+  margin: 20px;
 }
 
 #map {
@@ -270,4 +292,11 @@ tr:nth-child(even) {
   color: #2196f3;
   text-decoration: underline;
   cursor: pointer;
+}
+
+footer {
+  padding: 80px;
+  background-color: #2e4a29;
+  margin: 0px;
+  margin-top: 80px;
 }
