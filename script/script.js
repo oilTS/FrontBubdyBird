@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
       selectedFile = file;
+      const uploadIconImage = document.querySelector('.upload-icon img');
+      uploadIconImage.src = "/assets/file-music.svg";
       uploadText.textContent = `แนบไฟล์: ${file.name}`;
       uploadBox.classList.add("uploaded");
     }
@@ -50,10 +52,12 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then(data => {
         alert("อัปโหลดสำเร็จ!");
+          //uploadText.textContent = "อัปโหลดสำเร็จ!";
       })
       .catch(err => {
         alert("เกิดข้อผิดพลาดในการอัปโหลด");
         console.error(err);
+        uploadBox.classList.remove("uploaded");
       });
   });
 
