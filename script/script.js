@@ -86,30 +86,42 @@ document.addEventListener("DOMContentLoaded", function () {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  const customIcon = (image) => {
-    const pinurl = '/assets/pin-2.svg';
-    // ถ้าอยากใช้ pin ใน /assets ให้เปลี่ยน L.divIcon เป็น L.icon + ลบส่วน html กับ classname ออก + แก้ไอคอนเซตติ้งตามคอมเม้น
-    return L.divIcon({
-      html: `<div style="
-      width: 40px;
-      height: 40px;
-      background: url('/image/${image}') no-repeat;
-      background-size: cover;
-      background-position: right center;
-      border-radius: 50%;
-      border: 2.5px solid #fff;
-      box-shadow: 0px 0px 10px #0d8a21; outline: 3px solid #05581f">
-      <div style="color: #05581f;
-      margin-top: 32px; margin-left: 10px; 
-      text-shadow: -0px 8px 15px #0d8a21; font-size: 16px;">▼</div></div>`,
-      className: "",
-      iconUrl: pinurl,
-      shadowUrl: '/assets/pin-blur.png',
-      iconSize: [38, 95],
-      iconAnchor: [25, 25],   //22, 94
-      shadowSize:   [25, 12],
-      shadowAnchor: [15, 32],
-      popupAnchor: [-6, -25]  //-3, -60
+  //marker (pin)
+  function customIconAsync(image) {
+    return new Promise((resolve) => {
+      const path = `/image/${image}`;
+      const img = new Image();
+      img.onload = () => {
+        resolve(L.divIcon({
+          html: `<div class="custom-marker-bounce" style="
+            width: 40px;
+            height: 40px;
+            background: url('${path}') no-repeat center;
+            background-size: cover;
+            border-radius: 50%;
+            border: 2.5px solid #fff;
+            box-shadow: 0 0 10px #0d8a21; outline: 3px solid #05581f">
+            <div style="color: #05581f; margin-top: 32px; margin-left: 10px;
+            text-shadow: 0 8px 15px #0d8a21; font-size: 16px;">▼</div>
+          </div>`,
+          className: "",
+          iconSize: [40, 40],
+          iconAnchor: [20, 40],
+          popupAnchor: [0, -35]
+        }));
+      };
+      img.onerror = () => {
+        resolve(L.icon({
+          iconUrl: '/assets/pin-2.svg',
+          shadowUrl: '/assets/pin-blur.png',
+          iconSize: [38, 95],
+          iconAnchor: [22, 94],
+          shadowSize: [25, 12],
+          shadowAnchor: [15, 32],
+          popupAnchor: [-3, -60]
+        }));
+      };
+      img.src = path;
     });
   }
 
@@ -138,70 +150,71 @@ document.addEventListener("DOMContentLoaded", function () {
         sortAndRender();
       });
 
-      const renderTable = (entries) => {
-        const tableBody = document.querySelector("#birdTable tbody");
-        tableBody.innerHTML = "";
-        markerLayer.clearLayers();
+      const renderTable = async (entries) => {
+      const tableBody = document.querySelector("#birdTable tbody");
+      tableBody.innerHTML = "";
+      markerLayer.clearLayers();
 
-        entries.forEach((item, index) => {
-          const [lat, lng] = item.location.split(",").map(Number);
+      for (const item of entries) {
+        const [lat, lng] = item.location.split(",").map(Number);
 
-          const marker = L.marker([lat, lng], {
-            icon: customIcon(item.image) // pass the bird image for dynamic icons
-          }).bindPopup(`
-            <strong style="font-size:15px">${item.species}</strong><br/>
-            <img src="image/${item.image}" width="150" style="margin:15px auto 20px auto; display: block; border-radius: 6%;"> 
-          `).addTo(markerLayer);
+        const icon = await customIconAsync(item.image); // async: dynamically load icon with fallback
 
-          const row = document.createElement("tr");
-          row.innerHTML = `
-            <td><button class="play-btn" data-src="audio/${item.file}"> 🔊 </button></td>
-            <td>${item.species}</td>
-            <td>${item.country || 'Thailand'}</td>
-            <td><span class="clickable-location" data-lat="${lat}" data-lng="${lng}">
-              ${item.location}
-            </span></td>
-          `;
+        const marker = L.marker([lat, lng], {
+          icon: icon
+        }).bindPopup(`
+          <strong style="font-size:15px">${item.species}</strong><br/>
+          <img src="image/${item.image}" width="150" style="margin:15px auto 20px auto; display: block; border-radius: 6%;">
+        `).addTo(markerLayer);
 
-          // คลิกพิกัด → ไปที่ map
-          row.querySelector(".clickable-location").addEventListener("click", () => {
-            const offsetLat = lat + 0.004; // shift view slightly south to "lower" the popup in the center
-            map.setView([offsetLat, lng], 15);
-            marker.openPopup();
-          });
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td><button class="play-btn" data-src="audio/${item.file}" title="play"> 🔊 </button></td>
+          <td>${item.species}</td>
+          <td>${item.country || 'Thailand'}</td>
+          <td><span class="clickable-location" data-lat="${lat}" data-lng="${lng}" title="see on map">
+            ${item.location}
+          </span></td>
+        `;
 
-          // ปุ่มเล่นเสียง
-          const audio = new Audio("audio/" + item.file);
-          const playBtn = row.querySelector(".play-btn");
-          playBtn.addEventListener("click", () => {
-            if (window.currentAudio && window.currentAudio !== audio) {
-              window.currentAudio.pause();
-              if (window.currentPlayBtn) window.currentPlayBtn.textContent = " 🔊 ";
-            }
-
-            if (audio.paused) {
-              audio.play();
-              playBtn.textContent = "🎵";
-              window.currentAudio = audio;
-              window.currentPlayBtn = playBtn;
-            } else {
-              audio.pause();
-              playBtn.textContent = "🔈";
-              window.currentAudio = null;
-              window.currentPlayBtn = null;
-            }
-
-            audio.addEventListener("ended", () => {
-              playBtn.textContent = "🔊";
-              window.currentAudio = null;
-              window.currentPlayBtn = null;
-            });
-          });
-
-          tableBody.appendChild(row);
+        // คลิกพิกัด → ไปที่ map
+        row.querySelector(".clickable-location").addEventListener("click", () => {
+          const offsetLat = lat + 0.004; // shift view slightly south to "lower" the popup in the center
+          map.setView([offsetLat, lng], 15);
+          marker.openPopup();
         });
-      };
 
+        // ปุ่มเล่นเสียง
+        const audio = new Audio("audio/" + item.file);
+        const playBtn = row.querySelector(".play-btn");
+        playBtn.addEventListener("click", () => {
+          if (window.currentAudio && window.currentAudio !== audio) {
+            window.currentAudio.pause();
+            if (window.currentPlayBtn) window.currentPlayBtn.textContent = " 🔊 ";
+          }
+
+          if (audio.paused) {
+            audio.play();
+            playBtn.textContent = "🎵";
+            window.currentAudio = audio;
+            window.currentPlayBtn = playBtn;
+          } else {
+            audio.pause();
+            playBtn.textContent = "🔈";
+            window.currentAudio = null;
+            window.currentPlayBtn = null;
+          }
+
+          audio.addEventListener("ended", () => {
+            playBtn.textContent = "🔊";
+            window.currentAudio = null;
+            window.currentPlayBtn = null;
+          });
+        });
+
+        tableBody.appendChild(row);
+      }
+    };
       sortAndRender();
     })
     .catch(err => console.error("โหลดข้อมูลไม่สำเร็จ:", err));

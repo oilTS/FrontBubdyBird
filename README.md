@@ -47,4 +47,5 @@ This project is part of **CS232: Introduction to Cloud Computing Technology** co
 ---
 
 
-***Group 15***
+***Group 15***  
+> **Note:** This is the first version of the web page, with no connection to the real backend system. The information here is just a mockup. For the updated version, go to: #

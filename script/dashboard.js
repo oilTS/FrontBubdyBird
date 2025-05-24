@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addEventListeners();
   }
     function addEventListeners() {
-      
+
     document.querySelectorAll(".play-btn").forEach(btn => {
       const audio = new Audio(btn.getAttribute("data-src"));
       btn.addEventListener("click", () => {
@@ -98,6 +98,19 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
+    const customIcon = (image) => {
+      const pinurl = '/assets/pin-h.svg'; // or optionally use the image param
+      return L.icon({
+        iconUrl: pinurl,
+        shadowUrl: '/assets/pin-blur.png',
+        iconSize: [38, 95],
+        iconAnchor: [22, 94],
+        shadowSize: [25, 12],
+        shadowAnchor: [15, 32],
+        popupAnchor: [-3, -60]
+      });
+    };
+
     document.querySelectorAll(".clickable-location").forEach(span => {
       span.addEventListener("click", () => {
         const lat = parseFloat(span.getAttribute("data-lat"));
@@ -108,11 +121,17 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("map-popup").style.display = "flex";
 
         setTimeout(() => {
-          if (L.DomUtil.get('popup-map') !== null) {
-            L.DomUtil.get('popup-map')._leaflet_id = null;
+          const popupMapContainer = document.getElementById("popup-map");
+
+          // Reset map if already exists
+          if (popupMapContainer._leaflet_id) {
+            popupMapContainer._leaflet_id = null;
           }
 
-          const popupMap = L.map("popup-map").setView([lat, lng], 13);
+          // Slightly offset latitude to push popup to visual center
+          const offsetLat = lat + 0.005;
+
+          const popupMap = L.map("popup-map").setView([offsetLat, lng], 15);
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
           }).addTo(popupMap);
@@ -122,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src="image/${bird.image}" width="100">
           `;
 
-          L.marker([lat, lng])
+          L.marker([lat, lng], { icon: customIcon(bird.image) }) // ✅ custom icon
             .addTo(popupMap)
             .bindPopup(popupContent)
             .openPopup();

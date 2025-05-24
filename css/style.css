@@ -14,7 +14,7 @@ body {
 .content {
   padding: 50px;
   border-radius: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -258,6 +258,7 @@ tr:nth-child(even) {
   padding: 10px;
   background-color: #fdedc8;
   transition: all 0.2s;
+  cursor: pointer;
 }
 
 .play-btn:hover {
@@ -316,34 +317,23 @@ tr:nth-child(even) {
 .unsure:hover  { background-color: #444444; }
 .wrong:hover   { background-color: #860907; }
 
-div .more-link {
-  display: flex;
+#new-page {
+  text-align: center;
 }
 
 .more-link {
   background-color: #759b6d;
   border-radius: 30px;
-  box-shadow: #cc852160 0 -25px 18px -14px inset,
-  rgba(44, 187, 99, .15) 0 1px 2px,rgba(168, 187, 44, 0.15) 0 2px 4px,
-  rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,
-  rgba(44, 187, 99, .15) 0 16px 32px;
+  box-shadow: #3e24007c 0 -25px 18px -14px inset,
+  rgba(4, 109, 44, 0.471) 0 1px 2px,rgba(84, 187, 44, 0.15) 0 2px 4px,
+  rgba(187, 154, 44, 0.362) 0 4px 8px,rgba(5, 57, 0, 0.15) 0 8px 16px,
+  rgba(187, 139, 44, 0.15) 0 16px 32px;
   cursor: pointer;
   padding: 7px 20px;
   transition: all 0.5s;
   border: 0;
   touch-action: manipulation;
   margin-top: 20px;
-  margin-left: auto;
-  align-items: end;
-}
-
-.more-link a {
-  font-weight: lighter;
-  color: #eeeeee;
-  font-size: 16px;
-  user-select: none;
-  text-align: center;
-  text-decoration: none;  
 }
 
 .more-link:hover {
@@ -355,9 +345,23 @@ div .more-link {
   transform: scale(1.05);
 }
 
+.more-link a {
+  font-weight: lighter;
+  color: #eeeeee;
+  font-size: 16px;
+  user-select: none;
+  text-align: center;
+  text-decoration: none;  
+}
+
 .more-link img {
   width: 25px;
   filter: brightness(0) invert(1);
+}
+
+.more-link a, .more-link img {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .clickable-location {
@@ -368,6 +372,46 @@ div .more-link {
 
 .clickable-location:hover {
   color: #a26b3e;
+}
+
+.custom-marker-bounce {
+  animation: bounce 1.5s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/*info section*/
+.info {
+  background: linear-gradient(to bottom, #f5f3ef, #f2e7db, #cfdcab, #82af75);
+  padding: 40px 30px 50px 25px;
+}
+
+.info h2 {
+  margin-left: 35px;
+  color:#08680b;
+  font-size: 30px;
+}
+
+.info .des {
+  display: block;
+  margin: 20px;
+  padding: 20px;
+  padding-top: 0;
+}
+
+.des p {
+  color: #63b82f;
+}
+
+.des-li {
+  color:#2e2e2e;
 }
 
 footer {

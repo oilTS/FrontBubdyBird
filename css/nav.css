@@ -36,6 +36,7 @@ header {
   color: white;
   font-weight: bold;
   margin-left: -35px;
+  cursor: default;
 }
 
 .logo img, .logo span {
@@ -147,7 +148,7 @@ header {
 }
 
 /*responsive: mobile*/
-@media (max-width: 768px) {
+@media (max-width: 768px) {   /*768*/
   .nav nav {
     flex-direction: column;
     align-items: flex-start;
