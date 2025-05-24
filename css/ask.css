@@ -15,10 +15,10 @@ body {
   background: white;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px #06971ca2;
   text-align: center;
-  width: 400px;
-  margin: auto;
+  width: 450px;
+  margin: 30px auto;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -26,14 +26,29 @@ body {
   flex-direction: column;
 }
 
+.ask-container h2 {
+  color: #017019;
+  text-shadow: -1px -1px 5px #408f0f98;
+}
+
+.ask-container #sub {
+  color: #4bd569;
+  padding: 0px 0px 20px 0px;
+  text-shadow: -1px -1px 5px #bb7f1155;
+}
+
+.ask-container span {
+  color: #979797;
+}
+
 .card img {
-  width: 100%;
-  border-radius: 8px;
+  width: 80%;
+  border-radius: 10px;
   margin-bottom: 10px;
 }
 
 .feedback-buttons {
-  margin-top: 15px;
+  margin-top: 30px;
   display: flex;
   justify-content: space-between;
 }
@@ -41,15 +56,19 @@ body {
 .btn {
   padding: 8px 12px;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
   color: white;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .correct { background: #4caf50; }
 .unsure  { background: #757575; }
 .wrong   { background: #e53935; }
+
+.correct:hover { background-color: #08680b; }
+.unsure:hover  { background-color: #444444; }
+.wrong:hover   { background-color: #860907; }
 
 .popup-map-overlay {
   position: fixed;
@@ -80,8 +99,83 @@ body {
   font-weight: bold;
 }
 
-.clickable-location {
-  color: #2196f3;
+span.clickable-location {
+  color: #11bd47;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.clickable-location:hover {
+  color: #a26b3e;
+}
+
+.empty-d {
+  display: block;
+  padding: 50px;
+  padding-bottom: 80px;
+  background-color: transparent;
+}
+
+.home {
+  display: flex;
+  background-color: #759b6d;
+  border-radius: 30px;
+  box-shadow: #0b4407a0 0 -25px 18px -14px inset,
+  rgba(44, 187, 99, .15) 0 1px 2px,rgba(168, 187, 44, 0.15) 0 2px 4px,
+  rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,
+  rgba(44, 187, 99, .15) 0 16px 32px;
+  cursor: pointer;
+  padding: 7px 20px;
+  transition: all 0.5s;
+  border: 0;
+  touch-action: manipulation;
+  margin-top: 0px;
+  margin: auto;
+  align-items: end;
+}
+
+.home a {
+  font-weight: lighter;
+  color: #eeeeee;
+  font-size: 16px;
+  user-select: none;
+  text-align: center;
+  text-decoration: none;  
+}
+
+.home:hover {
+  background-color: #b09b7a;
+  box-shadow: rgba(122, 73, 4, 0.607) 0 -25px 18px -14px inset,
+  rgba(187, 127, 44, 0.25) 0 1px 2px,rgba(187, 134, 44, 0.25) 0 2px 4px,
+  rgba(165, 187, 44, 0.25) 0 4px 8px,rgba(185, 187, 44, 0.149) 0 8px 16px,
+  rgba(187, 156, 44, 0.166) 0 16px 32px;
+  transform: scale(1.05);
+}
+
+.home img {
+  width: 25px;
+  filter: brightness(0) invert(1);
+}
+
+.play-btn, #open-spectrogram {
+  border: 0;
+  border-radius: 100%;
+  padding: 5px;
+  background-color: #fdedc8;
+  transition: all 0.2s;
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+}
+
+.play-btn:hover {
+  background-color: #d2baa1;
+  box-shadow: 0 0 5px #70360374;
+}
+
+#open-spectrogram {
+  background-color: #d1fbde;
+}
+
+#open-spectrogram:hover {
+  background-color: #a4d7b4;
+  box-shadow: 0 0 5px #08700374;
 }

@@ -29,7 +29,8 @@
   </header>
 
   <main class="ask-container">
-    <h2>ช่วยเรายืนยันข้อมูลนก</h2>
+    <h2> ช่วยเราตรวจสอบข้อมูลนก </h2>
+    <p id="sub">ข้อมูลของคุณจะช่วยให้โมเดลของเราแม่นยำมากขึ้น</p>
     <div id="bird-card" class="card">
       <img id="bird-image" src="" alt="Bird Image" />
       <p><strong>ชื่อ:</strong> <span id="bird-species"></span></p>
@@ -39,7 +40,7 @@
       <p><strong>เวลา:</strong> <span id="bird-time">-</span></p>
       <p><strong>ประเทศ:</strong> <span id="bird-country">-</span></p>
       <p><strong>ตำแหน่ง:</strong> 
-        <span id="bird-location" class="clickable-location">(14.02, 100.727)</span>
+        <span id="bird-location" class="clickable-location">-</span>
       </p>
       <div class="feedback-buttons">
         <button class="btn correct" onclick="submitFeedback('correct')">ถูกต้อง</button>
@@ -64,6 +65,8 @@
       <img id="spectrogram-img" src="" style="width:100%; max-height:300px; object-fit:contain;">
     </div>
   </div>
+
+  <div class="empty-d"><button class="home"><a href="index.html">กลับหน้าหลัก</a></button></div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="/script/ask.js"></script>

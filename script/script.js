@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <td><button class="play-btn" data-src="audio/${item.file}"> 🔊 </button></td>
             <td>${item.species}</td>
             <td>${item.country || 'Thailand'}</td>
-            <td><span class="clickable-location" data-lat="${lat}" data-lng="${lng}" style="color:#2196f3; text-decoration:underline; cursor:pointer;">
+            <td><span class="clickable-location" data-lat="${lat}" data-lng="${lng}">
               ${item.location}
             </span></td>
           `;
