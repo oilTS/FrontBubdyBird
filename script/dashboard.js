@@ -1,12 +1,18 @@
 //nav bar when scrolled
 window.addEventListener("scroll", () => {
   const nav = document.querySelector("header");
-  if (window.scrollY > 50) {
+  if (window.scrollY >= 100) {
     nav.classList.add("scrolled");
   } else {
     nav.classList.remove("scrolled");
   }
 });
+if (window.innerWidth <= 768) {
+  const nDrop = document.querySelector('.n-drop');
+  nDrop.addEventListener('click', () => {
+    document.querySelector('header').classList.toggle('open');
+  });
+}
 
 let map;
 let markerLayer;
@@ -48,31 +54,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addEventListeners();
   }
-
-  function addEventListeners() {
-
-    document.querySelectorAll(".play-btn").forEach(playBtn => {
-      //const audio = new Audio(playBtn.getAttribute("data-src"));
-      const audio = new Audio("audio/" + item.file);
-      playBtn.addEventListener("click", () => {
+    function addEventListeners() {
+      
+    document.querySelectorAll(".play-btn").forEach(btn => {
+      const audio = new Audio(btn.getAttribute("data-src"));
+      btn.addEventListener("click", () => {
         if (window.currentAudio && window.currentAudio !== audio) {
-              window.currentAudio.pause();
-              if (window.currentPlayBtn) window.currentPlayBtn.textContent = " 🔊 ";
-            }
+          window.currentAudio.pause();
+          if (window.currentPlayBtn) window.currentPlayBtn.textContent = " 🔊 ";
+        }
         if (audio.paused) {
           audio.play();
-          playBtn.textContent = "🎵";
+          btn.textContent = "🎵";
           window.currentAudio = audio;
-          window.currentPlayBtn = playBtn;
+          window.currentPlayBtn = btn;
         } else {
           audio.pause();
-          playBtn.textContent = "🔈";
+          btn.textContent = "🔈 ";
           window.currentAudio = null;
           window.currentPlayBtn = null;
         }
-
         audio.addEventListener("ended", () => {
-          playBtn.textContent = "🔊";
+          btn.textContent = "🔊";
           window.currentAudio = null;
           window.currentPlayBtn = null;
         });

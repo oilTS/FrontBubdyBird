@@ -50,9 +50,9 @@ body {
 
 /*upload section*/
 @keyframes up {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(10px); }
-  100% { transform: translateY(0); }
+  0%   { transform: translateY(15px); }
+  50%  { transform: translateY(-5px); }
+  100% { transform: translateY(15px); }
 }
 
 .upload-section {
@@ -68,7 +68,7 @@ body {
 }
 
 .upload-text {
-  margin-top: 5px;
+  margin-top: 30px;
   font-size: larger;
   color: #785633;
   transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
@@ -93,7 +93,7 @@ body {
 
 .upload-box:hover .upload-icon,
 .upload-box:hover .upload-text {
-  transform: translateY(0px);
+  transform: translateY(-0px);
 }
 
 .upload-box:hover .upload-icon {
@@ -115,8 +115,11 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: transparent;
-  animation: up 2s ease-in-out infinite;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease-in-out;
+}
+
+.upload-icon img {
+  animation: up 2s ease-in-out infinite;  
 }
 
 .upload-icon img.hover-icon {
@@ -127,6 +130,7 @@ body {
   transform: scale(0.8);
   transition: transform 0.3s ease;
   filter: none;
+  animation: up 2s ease-in-out infinite;
 }
 
 .upload-box:not(.uploaded):hover .upload-icon img.default-icon {
@@ -141,7 +145,7 @@ body {
 
 .note {
   font-size: 14px;
-  margin-top: 35px;
+  margin-top: 18px;
   color: #bababa;
 }
 
