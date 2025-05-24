@@ -26,15 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td><button class="play-btn" data-src="audio/${item.file}">▶</button></td>
-        <td><button class="image-btn" data-img="image/${item.image}">🖼️</button></td>
+        <td><button class="play-btn" data-src="audio/${item.file}"> 🔊 </button></td>
+        <td><button class="image-btn" data-img="image/${item.image}"> 👁 </button></td>
         <td>${item.species}</td>
         <td>${item.length}</td>
         <td>${item.date}</td>
         <td>${item.time}</td>
         <td>${item.country}</td>
         <td><span class="clickable-location" data-index="${index}" data-lat="${lat}" data-lng="${lng}">${item.location}</span></td>
-        <td><button class="spectrogram-btn" data-img="${item.spectrogram}">📈</button></td>
+        <td><button class="spectrogram-btn" data-img="${item.spectrogram}"> 📈 </button></td>
         <td>${item.confidence}</td>
       `;
       tableBody.appendChild(row);
@@ -50,26 +50,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function addEventListeners() {
-    document.querySelectorAll(".play-btn").forEach(btn => {
-      const audio = new Audio(btn.getAttribute("data-src"));
-      btn.addEventListener("click", () => {
+
+    document.querySelectorAll(".play-btn").forEach(playBtn => {
+      //const audio = new Audio(playBtn.getAttribute("data-src"));
+      const audio = new Audio("audio/" + item.file);
+      playBtn.addEventListener("click", () => {
         if (window.currentAudio && window.currentAudio !== audio) {
-          window.currentAudio.pause();
-          if (window.currentPlayBtn) window.currentPlayBtn.textContent = "▶";
-        }
+              window.currentAudio.pause();
+              if (window.currentPlayBtn) window.currentPlayBtn.textContent = " 🔊 ";
+            }
         if (audio.paused) {
           audio.play();
-          btn.textContent = "⏸";
+          playBtn.textContent = "🎵";
           window.currentAudio = audio;
-          window.currentPlayBtn = btn;
+          window.currentPlayBtn = playBtn;
         } else {
           audio.pause();
-          btn.textContent = "▶";
+          playBtn.textContent = "🔈";
           window.currentAudio = null;
           window.currentPlayBtn = null;
         }
+
         audio.addEventListener("ended", () => {
-          btn.textContent = "▶";
+          playBtn.textContent = "🔊";
           window.currentAudio = null;
           window.currentPlayBtn = null;
         });
@@ -126,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function sortAndRender() {
-    headerSpecies.innerHTML = 'ชื่อชนิดนก ' + (ascending ? '▲' : '▼');
+    headerSpecies.innerHTML = (ascending ? '⮃' : '⮃') + ' ชื่อชนิดนก ';
     currentData.sort((a, b) => {
       const nameA = a.species.toLowerCase();
       const nameB = b.species.toLowerCase();

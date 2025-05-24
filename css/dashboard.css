@@ -13,10 +13,23 @@ body {
 
 .table-section {
   padding: 30px;
+  margin-bottom: 50px;
 }
 
 h2 {
-  margin-bottom: 20px;
+  color: #3e2502;
+  text-shadow: -1px -1px 5px #bb7f1198;
+  margin-bottom: 30px;
+}
+
+.clickable-location {
+  color: #11bd47;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.clickable-location:hover {
+  color: #5e2d06;
 }
 
 .table-wrapper {
@@ -24,7 +37,7 @@ h2 {
   background: white;
   border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px #4f260074;
 }
 
 table {
@@ -34,31 +47,41 @@ table {
 
 th, td {
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
   text-align: left;
 }
 
 th {
-  background-color: #f0f0f0;
+  background-color: #cabead;
+  color: #4b2a00;
+  cursor: pointer;
 }
 
 tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #f8f8f1;
 }
 
-a.link {
-  color: #007bff;
-  text-decoration: none;
+.play-btn, .image-btn, .spectrogram-btn {
+  border: 0;
+  border-radius: 100%;
+  padding: 10px;
+  background-color: #fdedc8;
+  transition: all 0.2s;
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
 }
 
-a.link:hover {
-  text-decoration: underline;
+.play-btn:hover, .image-btn:hover, .spectrogram-btn:hover {
+  background-color: #d2baa1;
+  box-shadow: 0 0 5px #70360374;
 }
 
-.clickable-location {
-  color: #2196f3;
-  text-decoration: underline;
-  cursor: pointer;
+.image-btn {
+  background-color: #d1fbde;
+}
+
+.image-btn:hover {
+  background-color: #a4d7b4;
+  box-shadow: 0 0 5px #08700374;
 }
 
 .popup-map-overlay {
