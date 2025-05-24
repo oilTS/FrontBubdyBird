@@ -1,3 +1,13 @@
+//nav bar when scrolled
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector("header");
+  if (window.scrollY > 50) {
+    nav.classList.add("scrolled");
+  } else {
+    nav.classList.remove("scrolled");
+  }
+});
+
 let currentIndex = 0;
 let birdData = [];
 let currentAudio = null;

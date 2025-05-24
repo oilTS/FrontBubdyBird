@@ -1,3 +1,19 @@
+//nav bar when scrolled
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector("header");
+  if (window.scrollY > 50) {
+    nav.classList.add("scrolled");
+  } else {
+    nav.classList.remove("scrolled");
+  }
+});
+if (window.innerWidth <= 768) {
+  const nDrop = document.querySelector('.n-drop');
+  nDrop.addEventListener('click', () => {
+    document.querySelector('header').classList.toggle('open');
+  });
+}
+
 let map;
 let markerLayer;
 let selectedFile = null;
@@ -20,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         uploadText.textContent = "click to upload file";
         uploadBox.classList.remove("uploaded");
         selectedFile = null;
+        document.getElementById("submit-upload").disabled = true;
         return;
       }
       selectedFile = file;
@@ -27,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
       uploadIconImage.src = "/assets/file-music.svg";
       uploadText.textContent = `แนบไฟล์: ${file.name}`;
       uploadBox.classList.add("uploaded");
+      document.getElementById("submit-upload").disabled = false;
     }
   });
 
@@ -190,11 +208,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ปุ่มแสดงผลลัพธ์แบบ mock
-document.getElementById("submit-btn")?.addEventListener("click", () => {
-  document.getElementById("result-img").src = "image/sparrow.jpg";
-  document.getElementById("thai-name").textContent = "นกกระจอกบ้าน";
-  document.getElementById("common-name").textContent = "Eurasian Tree Sparrow";
-  document.getElementById("accuracy").textContent = "75.43%";
+document.getElementById("submit-upload")?.addEventListener("click", () => { 
+  document.getElementById("result-img").src = "image/sparrow.jpg"; 
+  document.getElementById("thai-name").textContent = "House Sparrow"; 
+  document.getElementById("common-name").textContent = "Eurasian Tree Sparrow"; 
+  document.getElementById("accuracy").textContent = "75.43%"; 
   document.getElementById("result-popup").style.display = "flex";
 });
 
