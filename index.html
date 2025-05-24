@@ -47,7 +47,7 @@
         ขนาดไฟล์สูงสุด: 20MB
       </p>
     </div>
-    <button id="submit-upload" class="submit-btn" disabled title="upload file first">ประมวลผล</button>
+    <button id="submit-upload" class="submit-btn" disabled title="upload the file first">ประมวลผล</button>
   </section>
 
   <!-- Popup แสดงผล -->
@@ -67,13 +67,14 @@
   </div>
 
   <section class="flex-container">
+    
     <div class="map-card">
-      <h3>สำรวจนกบนแผนที่</h3>
+      <h3>👀 สำรวจข้อมูลนกบนแผนที่</h3>
       <div id="map"></div>
     </div>
 
     <div class="table-card">
-      <h3>ข้อมูลล่าสุด</h3>
+      <h3>🔎 ข้อมูลล่าสุด</h3>
       <div class="table-wrapper">
         <table id="birdTable">
           <thead>
@@ -87,15 +88,21 @@
           <tbody></tbody>
         </table>
       </div>
-      <a href="dashboard.html" class="more-link">ดูทั้งหมด</a>
+      <div><button class="more-link"><a href="dashboard.html">ดูทั้งหมด</a><img src="/assets/new-page.svg"></button></div>
     </div>
   </section>
 
+  <section class="info"></section>
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="/script/script.js"></script>
+
+  <footer>
+      <p>This project is part of <i>CS232: Introduction to Cloud Computing Technology</i></p>
+      <p>Group 15 | Section 450002</p>
+      <p><b>@2025</b></p>
+  </footer>
 </body>
 
-<footer>
 
-</footer>
 </html>

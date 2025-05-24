@@ -1,7 +1,7 @@
 //nav bar when scrolled
 window.addEventListener("scroll", () => {
   const nav = document.querySelector("header");
-  if (window.scrollY > 50) {
+  if (window.scrollY >= 100) {
     nav.classList.add("scrolled");
   } else {
     nav.classList.remove("scrolled");
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(res => res.json())
     .then(data => {
       const th = document.querySelector("#birdTable th.sortable");
-      th.innerHTML = 'ชื่อชนิดนก ▲';
+      th.innerHTML = 'ชื่อชนิดนก';
       th.style.cursor = "pointer";
       let ascending = true;
 
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ? a.species.localeCompare(b.species)
             : b.species.localeCompare(a.species);
         });
-        th.innerHTML = 'ชื่อชนิดนก ' + (ascending ? '▲' : '▼');
+        th.innerHTML = (ascending ? '⮃' : '⮃') + ' ชื่อชนิดนก ';
         renderTable(latest5);
       };
 

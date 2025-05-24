@@ -1,11 +1,11 @@
 /*For header navigation bar*/
 
 header {
-  background: linear-gradient(to right, #2e4a29, #4d6f3c);
+  background: linear-gradient(to right, #19321e, #2e4a29, #4d6f3c, #ab8f67);
   color: white;
   padding: 10px 20px 15px 20px;
   border-radius: 10px;
-  margin: 20px 20px 30px 20px;
+  margin: 20px 20px 20px 20px;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -182,6 +182,7 @@ header {
     padding-top: 50px;
     transform: translateY(-8px);
     transition: transform 0.3s ease-in-out;
+    color: #f6f2af;
   }
 
   header.scrolled .logo img{
@@ -209,5 +210,11 @@ header {
   }
 }
 
-
-
+footer {
+  padding: 20px;
+  background-color: #19321e;
+  margin: 0px;
+  color: #92be86;
+  font-size: 12px;
+  text-align: center;
+}
