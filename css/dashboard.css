@@ -117,6 +117,7 @@ tr:nth-child(even) {
 }
 
 .close-btn {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
   float: right;
   background: #fcfcfc;
   color: white;

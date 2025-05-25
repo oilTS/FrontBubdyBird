@@ -82,9 +82,10 @@ function submitFeedback(choice) {
   if (currentIndex < birdData.length) {
     loadBird(currentIndex);
   } else {
-    alert("ขอบคุณสำหรับ feedback!");
+    alert("ขอบคุณสำหรับข้อมูล!");
     document.getElementById("bird-card").style.display = "none";
-    
+    document.getElementById("ask").style.display = "none";
+    document.getElementById("thank").style.display = "block";
   }
 }
 

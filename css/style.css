@@ -14,7 +14,7 @@ body {
 .content {
   padding: 50px;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-align: center;
 }
 
@@ -46,6 +46,10 @@ body {
   height: 25px;
   background-color: #f8ab059c;
   z-index: -1;
+}
+
+.emoji {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
 }
 
 /*upload section*/
@@ -389,8 +393,8 @@ tr:nth-child(even) {
 
 /*info section*/
 .info {
-  background: linear-gradient(to bottom, #f5f3ef, #f2e7db, #cfdcab, #82af75);
-  padding: 40px 30px 50px 25px;
+  background: linear-gradient(to bottom, #f5f3ef, #f8f4ed, #f2e7db, #cfdcab, #82af75);
+  padding: 40px 30px 45px 25px;
 }
 
 .info h2 {
@@ -413,6 +417,86 @@ tr:nth-child(even) {
 .des-li {
   color:#2e2e2e;
 }
+
+.feature-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px 20px;
+}
+
+.feature-box {
+  background: #f5f3ef;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px #2c970860;
+  flex: 1 1 350px;
+  max-width: 350px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-5px);
+  background-color: #f5f3ef90;
+  box-shadow: 0 4px 25px #522d008d;
+  cursor: default;
+}
+
+.feature-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+}
+
+.feature-box:hover .feature-icon {
+  animation: bounce 1.5s infinite ease-in-out;
+}
+
+.feature-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(0, 101, 30);
+  margin-bottom: 10px;
+}
+
+.feature-desc {
+  font-size: 15px;
+  color: #727272;
+  line-height: 1.4;
+}
+
+#backToTopBtn {
+  display: block;
+  margin: 0 auto;
+  bottom: 40px;
+  right: 30px;
+  z-index: 100;
+  font-size: 16px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 30px;
+  background-color: #947a66;
+  color: #f2e7db;
+  cursor: pointer;
+  box-shadow: rgba(84, 59, 23, 0.607) 0 -25px 18px -14px inset, 0 0px 32px rgba(244, 243, 161, 0.677);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+#backToTopBtn:hover {
+  background-color: #726053;
+  box-shadow: #311a0081 0 -25px 18px -14px inset, 0 0px 32px rgba(244, 243, 161, 0.677);
+  transform: scale(1.05);
+}
+
+#backToTopBtn.show {
+  opacity: 1;
+  visibility: visible;
+}
+
 
 footer {
   padding: 80px;

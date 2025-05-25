@@ -39,6 +39,15 @@ body {
 
 .ask-container span {
   color: #979797;
+  margin-bottom: 5px;
+}
+
+h2#thank {
+  display: none;
+}
+
+.emoji {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
 }
 
 .card img {

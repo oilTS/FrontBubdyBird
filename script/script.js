@@ -141,7 +141,8 @@ document.addEventListener("DOMContentLoaded", function () {
             ? a.species.localeCompare(b.species)
             : b.species.localeCompare(a.species);
         });
-        th.innerHTML = (ascending ? '⮃' : '⮃') + ' ชื่อชนิดนก ';
+        const sort = (ascending ? '⮃' : '⮃');
+        th.innerHTML = sort + '<p title="sort"> ชื่อชนิดนก</p>';
         renderTable(latest5);
       };
 
@@ -218,6 +219,28 @@ document.addEventListener("DOMContentLoaded", function () {
       sortAndRender();
     })
     .catch(err => console.error("โหลดข้อมูลไม่สำเร็จ:", err));
+
+    const btn = document.getElementById("backToTopBtn");
+
+  // Show button after scrolling down to info
+  window.addEventListener("scroll", () => {
+    if (document.documentElement.scrollTop > 1500) {
+      btn.classList.add("show");
+    } else {
+      btn.classList.remove("show");
+    }
+  });
+
+  // Smooth scroll to upload box
+  btn.addEventListener("click", () => {
+    const uploadSection = document.querySelector(".upload-section");
+    if (uploadSection) {
+      uploadSection.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+
 });
 
 // ปุ่มแสดงผลลัพธ์แบบ mock
