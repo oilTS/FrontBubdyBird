@@ -1,3 +1,19 @@
+//nav bar when scrolled
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector("header");
+  if (window.scrollY >= 100) {
+    nav.classList.add("scrolled");
+  } else {
+    nav.classList.remove("scrolled");
+  }
+});
+if (window.innerWidth <= 768) {
+  const nDrop = document.querySelector('.n-drop');
+  nDrop.addEventListener('click', () => {
+    document.querySelector('header').classList.toggle('open');
+  });
+}
+
 let map;
 let markerLayer;
 let currentData = [];
@@ -16,15 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td><button class="play-btn" data-src="audio/${item.file}">▶</button></td>
-        <td><button class="image-btn" data-img="image/${item.image}">🖼️</button></td>
+        <td><button class="play-btn" data-src="audio/${item.file}"> 🔊 </button></td>
+        <td><button class="image-btn" data-img="image/${item.image}"> 👁 </button></td>
         <td>${item.species}</td>
         <td>${item.length}</td>
         <td>${item.date}</td>
         <td>${item.time}</td>
         <td>${item.country}</td>
         <td><span class="clickable-location" data-index="${index}" data-lat="${lat}" data-lng="${lng}">${item.location}</span></td>
-        <td><button class="spectrogram-btn" data-img="${item.spectrogram}">📈</button></td>
+        <td><button class="spectrogram-btn" data-img="${item.spectrogram}"> 📈 </button></td>
         <td>${item.confidence}</td>
       `;
       tableBody.appendChild(row);
@@ -38,28 +54,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addEventListeners();
   }
+    function addEventListeners() {
 
-  function addEventListeners() {
     document.querySelectorAll(".play-btn").forEach(btn => {
       const audio = new Audio(btn.getAttribute("data-src"));
       btn.addEventListener("click", () => {
         if (window.currentAudio && window.currentAudio !== audio) {
           window.currentAudio.pause();
-          if (window.currentPlayBtn) window.currentPlayBtn.textContent = "▶";
+          if (window.currentPlayBtn) window.currentPlayBtn.textContent = " 🔊 ";
         }
         if (audio.paused) {
           audio.play();
-          btn.textContent = "⏸";
+          btn.textContent = "🎵";
           window.currentAudio = audio;
           window.currentPlayBtn = btn;
         } else {
           audio.pause();
-          btn.textContent = "▶";
+          btn.textContent = "🔈 ";
           window.currentAudio = null;
           window.currentPlayBtn = null;
         }
         audio.addEventListener("ended", () => {
-          btn.textContent = "▶";
+          btn.textContent = "🔊";
           window.currentAudio = null;
           window.currentPlayBtn = null;
         });
@@ -82,6 +98,19 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
+    const customIcon = (image) => {
+      const pinurl = '/assets/pin-h.svg'; // or optionally use the image param
+      return L.icon({
+        iconUrl: pinurl,
+        shadowUrl: '/assets/pin-blur.png',
+        iconSize: [38, 95],
+        iconAnchor: [22, 94],
+        shadowSize: [25, 12],
+        shadowAnchor: [15, 32],
+        popupAnchor: [-3, -60]
+      });
+    };
+
     document.querySelectorAll(".clickable-location").forEach(span => {
       span.addEventListener("click", () => {
         const lat = parseFloat(span.getAttribute("data-lat"));
@@ -92,11 +121,17 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("map-popup").style.display = "flex";
 
         setTimeout(() => {
-          if (L.DomUtil.get('popup-map') !== null) {
-            L.DomUtil.get('popup-map')._leaflet_id = null;
+          const popupMapContainer = document.getElementById("popup-map");
+
+          // Reset map if already exists
+          if (popupMapContainer._leaflet_id) {
+            popupMapContainer._leaflet_id = null;
           }
 
-          const popupMap = L.map("popup-map").setView([lat, lng], 13);
+          // Slightly offset latitude to push popup to visual center
+          const offsetLat = lat + 0.005;
+
+          const popupMap = L.map("popup-map").setView([offsetLat, lng], 15);
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
           }).addTo(popupMap);
@@ -106,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src="image/${bird.image}" width="100">
           `;
 
-          L.marker([lat, lng])
+          L.marker([lat, lng], { icon: customIcon(bird.image) }) // ✅ custom icon
             .addTo(popupMap)
             .bindPopup(popupContent)
             .openPopup();
@@ -116,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function sortAndRender() {
-    headerSpecies.innerHTML = 'ชื่อชนิดนก ' + (ascending ? '▲' : '▼');
+    headerSpecies.innerHTML = (ascending ? '⮃' : '⮃') + ' ชื่อชนิดนก ';
     currentData.sort((a, b) => {
       const nameA = a.species.toLowerCase();
       const nameB = b.species.toLowerCase();

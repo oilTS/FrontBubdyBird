@@ -6,6 +6,7 @@
   <title>BuddyBirds Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Mitr&family=Noto+Sans+Thai&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
@@ -13,13 +14,15 @@
     <div class="nav">
       <nav>
         <div class="logo">
-          <img src="/image/bird_svgrepo.com.svg" alt="BuddyBirds Logo">
-          <span>BuddyBirds</span>
+          <img src="/assets/logo-line.svg" alt="BuddyBirds">
+          <span>BuddyBird</span>
         </div>
+        <p class="n-drop-desktop">▼</p>
         <div class="nav-links">
-          <a href="index.html">Home</a>
-          <a href="dashboard.html" class="active">Dashboard</a>
-          <a href="ask.html">Ask</a>
+          <a href="index.html" title="Home">Home</a>
+          <a href="dashboard.html" class="active" title="Dashboard">Dashboard</a>
+          <a href="ask.html" title="?">HelpUs!</a>
+          <p class="n-drop">▼</p>
         </div>
       </nav>
     </div>
@@ -38,11 +41,11 @@
             <th>ไฟล์เสียง</th>
             <th>รูป</th>
             <th>ชื่อชนิดนก</th>
-            <th>ความยาว</th>
+            <th>ความยาวไฟล์</th>
             <th>วันที่</th>
             <th>เวลา</th>
             <th>ประเทศ</th>
-            <th>Lat, Lon</th>
+            <th>ตำแหน่ง</th>
             <th>Spectrogram</th>
             <th>ความแม่นยำ</th>
           </tr>
@@ -53,30 +56,36 @@
   </section>
 
   <!-- Popup Map -->
-  <div id="map-popup" class="popup-map-overlay">
-    <div class="popup-map-content">
-      <button class="close-btn" onclick="closeMapPopup()">ปิด</button>
-      <div id="popup-map" style="width:100%; height:300px;"></div>
+  <div id="map-popup" class="popup-overlay">
+    <div class="popup-content">
+      <button class="close-btn" onclick="closeMapPopup()">❌</button>
+      <div id="popup-map" style="width:100%; height:300px; border-radius: 10px;"></div>
     </div>
   </div>
 
   <!-- Popup Image -->
-  <div id="image-popup" class="popup-map-overlay">
-    <div class="popup-map-content">
-      <button class="close-btn" onclick="closeImagePopup()">ปิด</button>
+  <div id="image-popup" class="popup-overlay">
+    <div class="popup-content">
+      <button class="close-btn" onclick="closeImagePopup()">❌</button>
       <img id="image-popup-img" src="" alt="Bird Image" style="width: 100%; max-height: 300px; object-fit: contain;" />
     </div>
   </div>
 
   <!-- Popup Spectrogram -->
-  <div id="spectrogram-popup" class="popup-map-overlay">
-    <div class="popup-map-content">
-      <button class="close-btn" onclick="closeSpectrogramPopup()">ปิด</button>
+  <div id="spectrogram-popup" class="popup-overlay">
+    <div class="popup-content">
+      <button class="close-btn" onclick="closeSpectrogramPopup()">❌</button>
       <img id="spectrogram-popup-img" src="" alt="Spectrogram" style="width: 100%; max-height: 300px; object-fit: contain;" />
     </div>
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="/script/dashboard.js"></script>
+
+  <footer>
+      <p>This project is part of <i>CS232: Introduction to Cloud Computing Technology</i></p>
+      <p>Group 15 | Section 450002</p>
+      <p><b>@2025</b></p>
+  </footer>
 </body>
 </html>

@@ -6,6 +6,7 @@
   <title>Bird Ask Page</title>
   <link href="https://fonts.googleapis.com/css2?family=Mitr&family=Noto+Sans+Thai&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/ask.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
@@ -13,20 +14,25 @@
     <div class="nav">
       <nav>
         <div class="logo">
-          <img src="/image/bird_svgrepo.com.svg" alt="BuddyBirds Logo">
-          <span>BuddyBirds</span>
+          <img src="/assets/logo-line.svg" alt="BuddyBirds">
+          <span>BuddyBird</span>
         </div>
+        <p class="n-drop-desktop">▼</p>
         <div class="nav-links">
-          <a href="index.html">Home</a>
-          <a href="dashboard.html">Dashboard</a>
-          <a href="ask.html" class="active">Ask</a>
+          <a href="index.html" title="Home">Home</a>
+          <a href="dashboard.html" title="Dashboard">Dashboard</a>
+          <a href="ask.html" class="active" title="?">HelpUs!</a>
+          <p class="n-drop">▼</p>
         </div>
       </nav>
     </div>
   </header>
 
   <main class="ask-container">
-    <h2>ช่วยเรายืนยันข้อมูลนก</h2>
+    <h2 id="ask"><span class="emoji">✅</span> ช่วยเราตรวจสอบข้อมูลนก </h2>
+    <h2 id="thank"><span class="emoji">❤</span>ขอบคุณสำหรับข้อมูล</h2>
+    <p id="sub">ข้อมูลของคุณจะช่วยให้โมเดลของเราแม่นยำมากขึ้น</p>
+  
     <div id="bird-card" class="card">
       <img id="bird-image" src="" alt="Bird Image" />
       <p><strong>ชื่อ:</strong> <span id="bird-species"></span></p>
@@ -36,7 +42,7 @@
       <p><strong>เวลา:</strong> <span id="bird-time">-</span></p>
       <p><strong>ประเทศ:</strong> <span id="bird-country">-</span></p>
       <p><strong>ตำแหน่ง:</strong> 
-        <span id="bird-location" class="clickable-location">(14.02, 100.727)</span>
+        <span id="bird-location" class="clickable-location">-</span>
       </p>
       <div class="feedback-buttons">
         <button class="btn correct" onclick="submitFeedback('correct')">ถูกต้อง</button>
@@ -61,6 +67,8 @@
       <img id="spectrogram-img" src="" style="width:100%; max-height:300px; object-fit:contain;">
     </div>
   </div>
+
+  <div class="empty-d"><button class="home"><a href="index.html">กลับหน้าหลัก</a></button></div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="/script/ask.js"></script>

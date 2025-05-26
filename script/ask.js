@@ -1,3 +1,19 @@
+//nav bar when scrolled
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector("header");
+  if (window.scrollY >= 100) {
+    nav.classList.add("scrolled");
+  } else {
+    nav.classList.remove("scrolled");
+  }
+});
+if (window.innerWidth <= 768) {
+  const nDrop = document.querySelector('.n-drop');
+  nDrop.addEventListener('click', () => {
+    document.querySelector('header').classList.toggle('open');
+  });
+}
+
 let currentIndex = 0;
 let birdData = [];
 let currentAudio = null;
@@ -22,23 +38,27 @@ function loadBird(index) {
   }
 
   const playBtn = document.getElementById("bird-audio-btn");
-  playBtn.textContent = "▶";
+  playBtn.textContent = " 🔊 ";
   playBtn.onclick = () => {
     if (currentAudio) {
       currentAudio.pause();
-      playBtn.textContent = "▶";
+      playBtn.textContent = "🔈";
     }
     const audio = new Audio("audio/" + bird.file);
     currentAudio = audio;
-    audio.play();
-    playBtn.textContent = "⏸";
+    if (audio.paused) {
+      audio.play();
+      playBtn.textContent = "🎵";
+    } else {
+      audio.pause();
+      playBtn.textContent = "🔈";
+    }
     audio.onended = () => {
-      playBtn.textContent = "▶";
+      playBtn.textContent = "🔊";
       currentAudio = null;
     };
   };
 }
-
 function submitFeedback(choice) {
   const bird = birdData[currentIndex];
   const now = new Date();
@@ -62,8 +82,10 @@ function submitFeedback(choice) {
   if (currentIndex < birdData.length) {
     loadBird(currentIndex);
   } else {
-    alert("ขอบคุณสำหรับ feedback!");
+    alert("ขอบคุณสำหรับข้อมูล!");
     document.getElementById("bird-card").style.display = "none";
+    document.getElementById("ask").style.display = "none";
+    document.getElementById("thank").style.display = "block";
   }
 }
 
@@ -114,7 +136,7 @@ function closeImgPopup() {
 }
 
 // โหลดข้อมูลนก
-fetch("data/bird_data.json")
+fetch("data/bird_data.json") 
   .then(res => res.json())
   .then(data => {
     birdData = data;

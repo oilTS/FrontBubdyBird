@@ -6,6 +6,7 @@
   <title>BuddyBirds</title>
   <link href="https://fonts.googleapis.com/css2?family=Mitr&family=Noto+Sans+Thai&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
@@ -13,39 +14,47 @@
    <div class="nav">
       <nav>
         <div class="logo">
-          <img src="/image/bird_svgrepo.com.svg" alt="BuddyBirds Logo">
-          <span>BuddyBirds</span>
-        </div>
+          <img src="/assets/logo-line.svg" alt="BuddyBirds">
+          <span>BuddyBird</span>
+        </div><p class="n-drop-desktop">▼</p>
         <div class="nav-links">
-          <a href="index.html" class="active">Home</a>
-          <a href="dashboard.html">Dashboard</a>
-          <a href="ask.html">Ask</a>
+          <a href="index.html" class="active" title="Home">Home</a>
+          <a href="dashboard.html" title="Dashboard">Dashboard</a>
+          <a href="ask.html" title="?">HelpUs!</a>
+          <p class="n-drop">▼</p>
         </div>
       </nav>
     </div>
   </header>
 
   <div class="content">
-    <h2>BuddyBird</h2>
-    <p>ระบบนี้ช่วยให้คุณสามารถอัปโหลดไฟล์เสียงเพื่อตรวจจับชนิดนก พร้อมแสดงตำแหน่งบนแผนที่</p>
+    <h2 id="topic">BuddyBird</h2>
+    <p>อัปโหลดไฟล์เสียงเพื่อทำนายชนิดของนกพร้อมแสดงตำแหน่งบนแผนที่</p>
+    <p class="emoji" style="margin-top: 20px;">
+    🐦🔊📍🗺️</p>
   </div>
 
   <section class="upload-section">
-    <h2>Let's get started!</h2>
-    <div class="upload-box" id="upload-box">
-      <div class="upload-icon">⬆</div>
-      <p>click to upload file</p>
-      <p class="note">ประเภทไฟล์ที่รองรับ: .wav, .mp3, .aac</p>
-      <p class="note">ขนาดไฟล์สูงสุด: 20MB</p>
+    <h2 style="font-size: x-large;">Let's get started!</h2>
+    <div class="upload-box" id="upload-box" title="browser file...">
+      <div class="upload-icon">
+        <img class="default-icon" src="/assets/upload-1.svg" alt="⭡">
+        <img class="hover-icon" src="/assets/upload-2.svg" alt="⭡">
+        <p class="upload-text">คลิกเพื่ออัพโหลดไฟล์เสียงนก</p>
+      </div>
+      <p class="note">
+        ประเภทไฟล์ที่รองรับ: .wav, .mp3, .aac<br>
+        ขนาดไฟล์สูงสุด: 20MB
+      </p>
     </div>
-    <button id="submit-upload" class="submit-btn">Submit</button>
+    <button id="submit-upload" class="submit-btn" disabled title="upload the file first">ประมวลผล</button>
   </section>
 
   <!-- Popup แสดงผล -->
   <div class="popup-overlay" id="result-popup">
     <div class="popup-content">
       <h3>Result</h3>
-      <img id="result-img" src="image/sparrow.jpg" alt="Bird" />
+      <img id="result-img" src="#" alt="Bird" />
       <p><strong>Thai Name:</strong> <span id="thai-name">นกกระจอกบ้าน</span></p>
       <p><strong>Common Name:</strong> <span id="common-name">Eurasian Tree Sparrow</span></p>
       <p><strong>Accurate:</strong> <span id="accuracy">75.43%</span></p>
@@ -58,13 +67,14 @@
   </div>
 
   <section class="flex-container">
+    
     <div class="map-card">
-      <h3>Map</h3>
+      <h3>👀 สำรวจข้อมูลนกบนแผนที่</h3>
       <div id="map"></div>
     </div>
 
     <div class="table-card">
-      <h3>ข้อมูลล่าสุด</h3>
+      <h3>🔎 ข้อมูลล่าสุด</h3>
       <div class="table-wrapper">
         <table id="birdTable">
           <thead>
@@ -72,17 +82,112 @@
               <th>ไฟล์เสียง</th>
               <th class="sortable">ชื่อชนิดนก</th>
               <th>ประเทศ</th>
-              <th>Lat, Lon</th>
+              <th>ตำแหน่ง</th>
             </tr>
           </thead>
           <tbody></tbody>
         </table>
       </div>
-      <a href="dashboard.html" class="more-link">ดูทั้งหมด</a>
+      <div id="new-page">
+        <button class="more-link" title="view full data...">
+          <a href="dashboard.html">ดูทั้งหมด</a>
+          <img src="/assets/new-page.svg" alt="↗">
+        </button>
     </div>
+  </section>
+
+  <section class="info">
+    <h2><span class="emoji">🕊</span>
+      What is BuddyBird?</h2>
+    <div class="des">
+      <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        ในพื้นที่ป่า อุทยาน หรือแม้แต่ในชุมชนเมือง การได้ยินเสียงนกหลากหลายชนิดอาจเป็นสัญญาณบ่งบอกถึงความสมบูรณ์ของระบบนิเวศ 
+        แต่การเก็บข้อมูลเสียงนกในปัจจุบันมักกระจัดกระจาย และไม่มีระบบกลางในการรวบรวม วิเคราะห์ และจัดเก็บอาจทำให้เกิดปัญหาหลายอย่าง 
+        <span style="color: darkgreen;">BuddyBird</span> เป็นระบบที่สร้างขึ้นเพื่อรองรับต่อปัญหาในการศึกษาความหลากหลายทางชีวภาพต่างๆ  
+        โดยเราจะมุ่งเน้นไปยังการจำแนกเสียงนกจากไฟล์เสียงเพื่อทำนายชนิดของนก การแสดงข้อมูลของนกบนแผนที่ ตารางแดชบอร์ดที่แสดงผลข้อมูลที่เคยมีการประมวลผล 
+        รวมถึงไฟล์สเปกโตรแกรม (Spectrogram) ที่ได้จากเสียงสำหรับการดาวน์โหลดเพื่อนำไปใช้ศึกษาต่อไป 
+        ซึ่งระบบนี้มีการนำความรู้เรื่องเทคโนโลยี Cloud Computing มาประยุกต์ใช้ในการเขียนเรียกใช้ฟังก์ชันเพื่อประมวลผลข้อมูลแบบไร้เซิร์ฟเวอร์
+      </p>
+    </div>
+    <div class="des-li">
+      <h2><span class="emoji">✨</span>
+      Features</h2>
+
+      <section class="feature-section">
+        <div class="feature-box">
+          <div class="feature-icon">📤</div>
+          <div class="feature-title">Bird Sound Upload</div>
+          <p class="feature-desc">
+            อัปโหลดเสียงร้องของนกในรูปแบบไฟล์เสียงเพื่อประมวลผลผ่านกระบวนการแบ็กเอนด์แบบไร้เซิร์ฟเวอร์
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">🔇</div>
+          <div class="feature-title">Noise Canceling</div>
+          <p class="feature-desc">
+            ฟังก์ชันการตัดเสียงรบกวนโดยอัตโนมัติก่อนมีการประมวลผลข้อมูล
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">🤖</div>
+          <div class="feature-title">Bird Sound Prediction Model</div>
+          <p class="feature-desc">
+            โมเดล AI ทำนายสายพันธุ์นกโดยอิงจากคุณลักษณะเสียงที่สกัดมาจากเสียงที่อัปโหลด
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">🗺️</div>
+          <div class="feature-title">Interactive Map</div>
+          <p class="feature-desc">
+            ดูภาพของนกที่ระบุได้ทั้งหมดบนแผนที่ หรือคลิกเลือกตำแหน่งของนกได้จากตารางแดชบอร์ด
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">📊</div>
+          <div class="feature-title">Bird Species Dashboard</div>
+          <p class="feature-desc">
+            ตารางสรุปรายการสายพันธุ์นกที่ระบุได้ ตำแหน่งที่ตั้ง ข้อมูลของนก รวมถึงสเปกโตรแกรมที่สร้างขึ้นจากไฟล์เสียงแต่ละไฟล์
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">📈</div>
+          <div class="feature-title">Spectrogram Export</div>
+          <p class="feature-desc">
+            ดาวน์โหลดไฟล์เสียงแต่ละไฟล์จะถูกแปลงเป็นภาพสเปกโตรแกรมสำหรับการวิเคราะห์
+          </p>
+        </div>
+
+        <!--
+        <div class="feature-box">
+          <div class="feature-icon">⏳</div>
+          <div class="feature-title">More to Come</div>
+          <p class="feature-desc">
+            We're constantly improving the platform. Stay tuned for more exciting features!
+          </p>
+        </div>
+        -->
+      </section>
+    </div>
+
+    <button id="backToTopBtn" title="Go to Upload Box">เริ่มสำรวจเลย!</button>
+
   </section>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="/script/script.js"></script>
+
+  <footer>
+      <p>This project is part of <i>CS232: Introduction to Cloud Computing Technology</i></p>
+      <p>Group 15 | Section 450002</p>
+      <p><b>@2025</b></p>
+  </footer>
 </body>
+
+
 </html>
